@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Đảng Phí - Quy định 01-QĐ/TW (2026)</title>
+    <!-- Thư viện giao diện trực tuyến -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Header -->
+    <header class="gradient-bg text-white py-8 px-4 shadow-lg">
+        <div class="max-w-5xl mx-auto text-center">
+            <h1 class="text-2xl md:text-3xl font-bold mb-2 uppercase tracking-wide">Công cụ tính Đảng phí</h1>
+            <p class="text-red-100 opacity-90 text-sm md:text-base">Theo Quy định số 01-QĐ/TW ngày 03/02/2026 của Bộ Chính trị</p>
+            
+            <div class="mt-4">
+                <a href="https://hcma.vn/noidung/Lists/ListTinTuc/Attachments/20735/qudtw01-signed-18422-1770522379625980784116.pdf" 
+                   target="_blank" 
+                   class="inline-flex items-center text-xs font-semibold text-white bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full border border-white/30 transition-all">
+                    <i class="fas fa-file-pdf mr-2"></i>Xem văn bản gốc (PDF)
+                </a>
+            </div>
+
+            <p class="mt-4 text-xs font-medium uppercase bg-white/10 inline-block px-3 py-1 rounded-full border border-white/20">
+                Đảng ủy xã Ô Lâm - Tỉnh An Giang
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 -mt-6">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+            <div class="p-6 md:p-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Phần Nhập liệu -->
+                    <div class="space-y-6">
+                        <section>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user-check mr-2 text-red-600"></i>Đối tượng Đảng viên
+                            </label>
+                            <select id="partyType" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 p-3 bg-gray-50 border transition-all">
+                                <option value="insurance">Đóng BHXH bắt buộc (Công chức, viên chức...)</option>
+                                <option value="pension">Đang hưởng lương hưu</option>
+                                <option value="student">Học sinh, sinh viên</option>
+                                <option value="free_under">Lao động tự do (Chưa đến tuổi nghỉ hưu)</option>
+                                <option value="free_over">Lao động tự do (Đã đủ tuổi nghỉ hưu)</option>
+                                <option value="overseas">Làm việc tại cơ quan VN ở nước ngoài</option>
+                            </select>
+                        </section>
+
+                        <section id="salarySection">
+                            <label id="salaryLabel" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-money-bill-wave mr-2 text-red-600"></i>Tiền lương tính BHXH (VNĐ)
+                            </label>
+                            <input type="number" id="baseAmount" placeholder="Nhập số tiền..." class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 p-3 bg-gray-50 border">
+                        </section>
+
+                        <section id="regionSection" class="hidden">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-map-marker-alt mr-2 text-red-600"></i>Lương tối thiểu vùng
+                            </label>
+                            <select id="minWageRegion" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 p-3 bg-gray-50 border">
+                                <option value="5310000">Vùng I (5.310.000đ)</option>
+                                <option value="4730000">Vùng II (4.730.000đ)</option>
+                                <option value="4140000">Vùng III (4.140.000đ)</option>
+                                <option value="3700000" selected>Vùng IV (3.700.000đ - Ô Lâm)</option>
+                            </select>
+                        </section>
+
+                        <section id="yearSection" class="hidden">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-calendar-alt mr-2 text-red-600"></i>Giai đoạn thực hiện
+                            </label>
+                            <div class="flex gap-4 p-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="radio" name="period" value="2026" checked class="text-red-600">
+                                    <span class="text-sm">2026 - 2027</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="radio" name="period" value="2028" class="text-red-600">
+                                    <span class="text-sm">Từ 2028</span>
+                                </label>
+                            </div>
+                        </section>
+
+                        <!-- Miễn giảm -->
+                        <section class="p-4 bg-blue-50 rounded-xl border border-blue-100">
+                            <h3 class="text-sm font-bold text-blue-800 mb-3 uppercase flex items-center">
+                                <i class="fas fa-star-of-life mr-2"></i>Trường hợp Đặc biệt
+                            </h3>
+                            <div class="space-y-3">
+                                <label class="flex items-center text-sm text-gray-700 cursor-pointer">
+                                    <input type="checkbox" id="policyPerson" class="rounded text-red-600 mr-2">
+                                    <span>Người có công / Trợ cấp BTXH (Giảm 50%)</span>
+                                </label>
+                                <label class="flex items-center text-sm text-gray-700 cursor-pointer">
+                                    <input type="checkbox" id="exemption50" class="rounded text-red-600 mr-2">
+                                    <span>Đủ 50 năm tuổi Đảng (Miễn đóng)</span>
+                                </label>
+                                <label class="flex items-center text-sm text-gray-700 cursor-pointer">
+                                    <input type="checkbox" id="poverty" class="rounded text-red-600 mr-2">
+                                    <span>Hộ nghèo, cận nghèo (Miễn đóng)</span>
+                                </label>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Phần Kết quả -->
+                    <div class="flex flex-col justify-center items-center bg-gray-50 rounded-2xl p-8 border-2 border-dashed border-gray-200">
+                        <div class="text-center">
+                            <h2 class="text-xs font-bold text-gray-500 mb-1 uppercase tracking-widest">Đảng phí phải đóng</h2>
+                            <div id="resultAmount" class="text-5xl font-black text-red-600 mb-2">0 <span class="text-2xl">đ</span></div>
+                            <p id="calcLogic" class="text-sm text-gray-500 font-medium italic">Vui lòng nhập dữ liệu</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="bg-gray-100 p-6 border-t border-gray-200">
+                <div class="flex items-start gap-4">
+                    <i class="fas fa-info-circle mt-1 text-blue-600"></i>
+                    <div class="text-xs text-gray-600 space-y-1">
+                        <p><strong>Lưu ý:</strong> Công cụ hỗ trợ tính toán nhanh dựa trên Quy định 01-QĐ/TW ngày 03/02/2026.</p>
+                        <p>Đảng viên có trách nhiệm báo cáo trung thực thu nhập để làm căn cứ đóng đảng phí.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <p class="text-center text-gray-400 text-xs mt-8">&copy; 2026 - Văn phòng Đảng ủy xã Ô Lâm</p>
+    </main>
+
+    <script>
+        const partyType = document.getElementById('partyType');
+        const salarySection = document.getElementById('salarySection');
+        const regionSection = document.getElementById('regionSection');
+        const yearSection = document.getElementById('yearSection');
+        const baseAmountInput = document.getElementById('baseAmount');
+        const minWageRegion = document.getElementById('minWageRegion');
+        const resultAmount = document.getElementById('resultAmount');
+        const calcLogic = document.getElementById('calcLogic');
+
+        function updateUI() {
+            const type = partyType.value;
+            salarySection.classList.toggle('hidden', ['student', 'free_under', 'free_over'].includes(type));
+            regionSection.classList.toggle('hidden', !['free_under', 'free_over'].includes(type));
+            yearSection.classList.toggle('hidden', !['free_under', 'free_over'].includes(type));
+            
+            if (type === 'insurance') {
+                document.getElementById('salaryLabel').innerHTML = '<i class="fas fa-money-bill-wave mr-2 text-red-600"></i>Tiền lương tính BHXH (VNĐ)';
+            } else if (type === 'pension') {
+                document.getElementById('salaryLabel').innerHTML = '<i class="fas fa-money-bill-wave mr-2 text-red-600"></i>Mức lương hưu (VNĐ)';
+            } else if (type === 'overseas') {
+                document.getElementById('salaryLabel').innerHTML = '<i class="fas fa-globe mr-2 text-red-600"></i>Mức sinh hoạt phí (VNĐ)';
+            }
+            calculate();
+        }
+
+        function calculate() {
+            const type = partyType.value;
+            const baseVal = parseFloat(baseAmountInput.value) || 0;
+            const isPolicy = document.getElementById('policyPerson').checked;
+            const isExempt50 = document.getElementById('exemption50').checked;
+            const isPoverty = document.getElementById('poverty').checked;
+            const period = document.querySelector('input[name="period"]:checked').value;
+            
+            let amount = 0;
+            let logic = "";
+
+            if (isExempt50 || isPoverty) {
+                amount = 0;
+                logic = isExempt50 ? "Miễn đóng (Đủ 50 năm tuổi Đảng)" : "Miễn đóng (Hộ nghèo)";
+            } else {
+                switch(type) {
+                    case 'insurance':
+                        amount = baseVal * 0.01;
+                        logic = "1% tiền lương tính BHXH";
+                        break;
+                    case 'pension':
+                        amount = baseVal * 0.005;
+                        logic = "0.5% lương hưu";
+                        break;
+                    case 'student':
+                        amount = 5000;
+                        logic = "Mức cố định học sinh (5.000đ)";
+                        break;
+                    case 'free_under':
+                    case 'free_over':
+                        let minWage = parseFloat(minWageRegion.value);
+                        let rate = 0;
+                        if (type === 'free_under') {
+                            rate = (period === '2026') ? 0.003 : 0.005;
+                            logic = (period === '2026') ? "0.3% lương tối thiểu" : "0.5% lương tối thiểu";
+                        } else {
+                            rate = (period === '2026') ? 0.002 : 0.003;
+                            logic = (period === '2026') ? "0.2% lương tối thiểu" : "0.3% lương tối thiểu";
+                        }
+                        amount = minWage * rate;
+                        break;
+                    case 'overseas':
+                        amount = baseVal * 0.01;
+                        logic = "1% sinh hoạt phí";
+                        break;
+                }
+                if (isPolicy && (type === 'free_under' || type === 'free_over' || type === 'student')) {
+                    amount = amount * 0.5;
+                    logic += " (-50% diện chính sách)";
+                }
+            }
+
+            amount = Math.round(amount);
+            resultAmount.innerHTML = amount.toLocaleString('vi-VN') + ' <span class="text-2xl">đ</span>';
+            calcLogic.innerText = amount > 0 || isExempt50 || isPoverty ? logic : "Vui lòng nhập dữ liệu";
+        }
+
+        [partyType, baseAmountInput, minWageRegion].forEach(el => el.addEventListener('input', calculate));
+        partyType.addEventListener('change', updateUI);
+        document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(el => el.addEventListener('change', calculate));
+
+        updateUI();
+    </script>
+</body>
+</html>
